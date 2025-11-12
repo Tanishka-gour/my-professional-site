@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanishka Gour | Python & AI Freelance Developer</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Load Lucide Icons for aesthetic vectors -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* Custom styles for the NEW NEON GREEN aesthetic */
+        :root {
+            --primary-color: #10b981; /* Tailwind emerald-500 (Vibrant Green) */
+            --primary-light: #34d399; /* Tailwind emerald-400 */
+            --background-dark: #000000; /* True Black for maximum contrast */
+            --card-background: #0d0d0d; /* Very dark gray for card lift */
+            /* UPDATED: Using the user's uploaded image */
+            --body-bg-image: url('image_730439.png');
+        }
+
+        /* Define the background animation for a slow, subtle move/pan */
+        @keyframes subtle-pan {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 100% 100%; }
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            position: relative; /* Needed for the ::before overlay */
+            min-height: 100vh;
+            color: #f3f4f6; /* Brighter off-white text for contrast */
+            scroll-behavior: smooth;
+            z-index: 1; /* Ensures body content is above the overlay */
+        }
+
+        /* Full Screen Background Image Container */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2; /* Place behind all content */
+            overflow: hidden;
+            background-color: var(--background-dark);
+            background-image: var(--body-bg-image);
+            background-size: cover; 
+            background-attachment: fixed;
+            background-position: center;
+            /* Apply the slow animation */
+            animation: subtle-pan 120s linear infinite alternate;
+        }
+
+        /* Dark Overlay for Readability */
+        .background-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Semi-transparent black overlay (80% opacity) */
+            background-color: rgba(0, 0, 0, 0.8); 
+            z-index: -1; /* Place between background image and content */
+        }
+        
+        /* Gradient for Hero Section to add depth - adjusted for transparency */
+        #hero {
+            /* Now using less gradient as the main overlay handles the darkness */
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(13, 13, 13, 0.5) 100%); 
+            border-bottom: 2px solid var(--primary-color);
+        }
+        /* Adjusted section backgrounds for slightly more transparency to show background */
+        #about, #projects {
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        #skills, #contact {
+            background-color: rgba(13, 13, 13, 0.75);
+            border-top: 1px solid var(--primary-color);
+            border-bottom: 1px solid var(--primary-color);
+        }
+
+
+        .section-title {
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 9999px;
+            /* Added subtle shadow to the divider */
+            box-shadow: 0 0 8px var(--primary-color);
+        }
+        .card {
+            background-color: var(--card-background);
+            border: 1px solid #1f2937; /* Subtle border */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, border-color 0.3s;
+            box-shadow: 0 8px 16px -4px rgba(0, 0, 0, 0.7); /* Stronger shadow */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            /* Enhanced shadow for a 'floating' effect with NEON GREEN GLOW */
+            box-shadow: 0 15px 35px -5px rgba(16, 185, 129, 0.5); 
+            border-color: var(--primary-light); /* Highlight border on hover */
+        }
+        /* Pulsing/Glow effect for Primary Button - NEON GREEN */
+        .cta-primary {
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.6);
+            animation: pulse-glow 2s infinite cubic-bezier(0.4, 0, 0.6, 1);
+        }
+        @keyframes pulse-glow {
+            0%, 100% {
+                box-shadow: 0 0 8px rgba(16, 185, 129, 0.4), 0 0 25px rgba(16, 185, 129, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 15px rgba(16, 185, 129, 0.7), 0 0 40px rgba(16, 185, 129, 0.4);
+            }
+        }
+        /* Mobile Hamburger Menu Styling */
+        @media (max-width: 768px) {
+            .mobile-menu {
+                display: none;
+                flex-direction: column;
+            }
+            .mobile-menu.open {
+                display: flex;
+            }
+        }
+        /* Style for the Contact Info Boxes */
+        .contact-info-box {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: var(--card-background);
+            border: 1px solid #1f2937;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            /* Add a subtle glow on hover */
+            cursor: pointer;
+        }
+
+        .contact-info-box:hover {
+            border-color: var(--primary-light);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+        }
+
+    </style>
+</head>
+<body class="antialiased">
+
+    <!-- NEW: Moving Background Container with Dark Overlay -->
+    <div class="background-container"></div>
+    <!-- END NEW BACKGROUND -->
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-black/95 backdrop-blur-sm shadow-lg border-b border-emerald-500/50">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <nav class="flex items-center justify-between h-16">
+                <!-- Logo/Name -->
+                <a href="#hero" class="text-2xl font-bold text-white transition duration-300 hover:text-emerald-400">
+                    &lt;TanishkaGour /&gt;
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex space-x-8 text-gray-300">
+                    <a href="#about" class="hover:text-emerald-400 transition duration-300">About</a>
+                    <a href="#skills" class="hover:text-emerald-400 transition duration-300">Skills</a>
+                    <a href="#projects" class="hover:text-emerald-400 transition duration-300">Projects</a>
+                    <a href="#contact" class="hover:text-emerald-400 transition duration-300">Contact</a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="menu-button" class="md:hidden text-gray-300 hover:text-emerald-400 focus:outline-none">
+                    <i data-lucide="menu" class="w-6 h-6"></i>
+                </button>
+            </nav>
+            <!-- Mobile Menu Dropdown -->
+            <div id="mobile-menu" class="mobile-menu md:hidden bg-gray-900/90 py-2 border-t border-gray-700">
+                <a href="#about" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800 transition duration-150">About</a>
+                <a href="#skills" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800 transition duration-150">Skills</a>
+                <a href="#projects" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800 transition duration-150">Projects</a>
+                <a href="#contact" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-800 transition duration-150">Contact</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero" class="py-24 md:py-32 text-center">
+            <div class="max-w-4xl mx-auto px-4">
+                <div class="w-32 h-32 mx-auto rounded-full overflow-hidden mb-6 border-4 border-emerald-500 shadow-xl shadow-emerald-500/50">
+                    <!-- Placeholder for Profile Image with Neon Green background -->
+                    <img src="https://placehold.co/128x128/10b981/000000?text=TG" alt="Profile Picture" class="w-full h-full object-cover" onerror="this.onerror=null; this.src='https://placehold.co/128x128/10b981/000000?text=TG'">
+                </div>
+                <h1 class="text-5xl md:text-7xl font-extrabold mb-4 leading-tight">
+                    Hi, I'm <span class="text-emerald-400">TANISHKA GOUR</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 mb-8 font-light">
+                    Backend/Full Stack Web Developer | Python(Django) Developer | AI/ML Developer | Crafting efficient, scalable digital solutions.
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <!-- CTA 1: Focused on Solutions/Projects - Now with pulsing NEON GREEN glow -->
+                    <a href="#projects" class="px-6 py-3 bg-emerald-500 text-black font-semibold rounded-lg hover:bg-emerald-400 transition duration-300 shadow-lg transform hover:scale-105 cta-primary">
+                        View Solutions (Projects)
+                    </a>
+                    <!-- CTA 2: Focused on Consultation/Hiring - Now with NEON GREEN border glow -->
+                    <a href="#contact" class="px-6 py-3 bg-transparent border-2 border-emerald-500 text-emerald-400 font-semibold rounded-lg hover:bg-emerald-500 hover:text-black transition duration-300 transform hover:scale-105 hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        Schedule a Consultation
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Me Section -->
+        <section id="about" class="py-20 md:py-28 max-w-6xl mx-auto px-4">
+            <h2 class="section-title text-4xl font-bold text-center mb-12">About Me</h2>
+            <div class="text-lg text-gray-300 space-y-6 max-w-3xl mx-auto">
+                <p>I am an ambitious B.Tech (CSE - AIML) student specializing in the convergence of robust web development and predictive machine learning. My core technical expertise lies in building full-stack applications using Python (Django) and MySQL, as demonstrated by my real-world Office Employee Management System project, where I handled everything from database design to front-end UI with Bootstrap.</p>
+                <p>Beyond web application development, my academic focus gives me a strong foundation in data science, including data preprocessing, model application (like Logistic Regression), and utilizing libraries like NumPy and Scikit-learn for predictive tasks (e.g., the Sonar Classification model). I am committed to writing clean, maintainable, and efficient code in both Python and Java.</p>
+                <p>I am a quick learner, adaptable team member, and actively upskilling with professional certifications in high-demand areas, including AWS Cloud Foundations and ServiceNow System Administration. I am eager to contribute my blend of software engineering, data analysis, and enterprise platform knowledge to challenging, future-focused roles.</p>
+            </div>
+        </section>
+
+        <!-- Skills Section - Neon green highlights -->
+        <section id="skills" class="py-20 md:py-28 border-t border-b border-emerald-500/20">
+            <div class="max-w-6xl mx-auto px-4">
+                <h2 class="section-title text-4xl font-bold text-center mb-12">Expertise & Technologies</h2>
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-8 text-center">
+                    <!-- Skill Card 1: Python/Django - Top border glow added -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="pyramid" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">Python / Django</span>
+                        <span class="text-xs text-gray-400">Backend Core</span>
+                    </div>
+                    <!-- Skill Card 2: AI/ML -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="cpu" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">AI / Machine Learning</span>
+                        <span class="text-xs text-gray-400">NumPy, Scikit-learn</span>
+                    </div>
+                    <!-- Skill Card 3: Database (MySQL) -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="database" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">MySQL & DBMS</span>
+                        <span class="text-xs text-gray-400">Data Management</span>
+                    </div>
+                    <!-- Skill Card 4: Frontend/Bootstrap -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="layout-grid" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">HTML / Bootstrap</span>
+                        <span class="text-xs text-gray-400">Responsive UI</span>
+                    </div>
+                    <!-- Skill Card 5: Java -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="coffee" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">Java & OOPs</span>
+                        <span class="text-xs text-gray-400">Strong Fundamentals</span>
+                    </div>
+                    <!-- Skill Card 6: Cloud/Enterprise -->
+                    <div class="p-4 rounded-xl card border-t-4 border-emerald-500 flex flex-col items-center justify-center hover:shadow-[0_0_15px_rgba(16,185,129,0.5)]">
+                        <i data-lucide="shield-check" class="w-8 h-8 text-emerald-400 mb-2"></i>
+                        <span class="font-semibold text-gray-200">AWS / ServiceNow</span>
+                        <span class="text-xs text-gray-400">Cloud & Certifications</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section - Updated titles and tags to reflect actual work -->
+        <section id="projects" class="py-20 md:py-28 max-w-6xl mx-auto px-4">
+            <h2 class="section-title text-4xl font-bold text-center mb-12">Client Solutions (Featured Projects)</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <!-- Project Card 1: Office Employee Management System (Client-focused title) -->
+                <div class="card rounded-xl overflow-hidden">
+                    <!-- Project Image Placeholder now uses Neon Green BG and clear label -->
+                    <img src="https://placehold.co/600x400/10b981/000000?text=DJANGO+OEMS" alt="Office Management System Thumbnail" class="w-full h-56 object-cover border-b-4 border-emerald-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/10b981/000000?text=DJANGO+OEMS'">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Custom Employee Record System (OEMS)</h3>
+                        <p class="text-gray-400 mb-4">A complete **Django-based web application** to streamline HR/employee records. Features include secure CRUD operations, department filters, search functionality, and attendance tracking for **optimized office workflow**.</p>
+                        <div class="flex flex-wrap gap-2 text-sm font-medium mb-4">
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Django</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">MySQL</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Bootstrap</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center">
+                                <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> View Live Demo
+                            </a>
+                            <a href="#" target="_blank" class="text-gray-400 hover:text-gray-300 flex items-center">
+                                <i data-lucide="github" class="w-4 h-4 mr-1"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project Card 2: Sonar Mine vs Rock Prediction (Data Science Focus) -->
+                <div class="card rounded-xl overflow-hidden">
+                    <!-- Project Image Placeholder now uses Neon Green BG and clear label -->
+                    <img src="https://placehold.co/600x400/10b981/000000?text=AI+ML+CLASSIFICATION" alt="AI Prediction Model Thumbnail" class="w-full h-56 object-cover border-b-4 border-emerald-500" onerror="this.onerror=null; this.src='https://placehold.co/600x400/10b981/000000?text=AI+ML+CLASSIFICATION'">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-white">Sonar Signal Classification Model</h3>
+                        <p class="text-gray-400 mb-4">Developed a Machine Learning model using **Logistic Regression** to accurately classify sonar signals (Mine vs. Rock). Demonstrated strong foundational skills in data preprocessing and predictive analytics with high accuracy.</p>
+                        <div class="flex flex-wrap gap-2 text-sm font-medium mb-4">
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Python</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Machine Learning</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Scikit-learn</span>
+                            <span class="bg-emerald-600/30 text-emerald-300 px-3 py-1 rounded-full">Data Preprocessing</span>
+                        </div>
+                        <div class="flex space-x-4">
+                            <a href="#" target="_blank" class="text-emerald-400 hover:text-emerald-300 font-semibold flex items-center">
+                                <i data-lucide="external-link" class="w-4 h-4 mr-1"></i> View Notebook
+                            </a>
+                            <a href="#" target="_blank" class="text-gray-400 hover:text-gray-300 flex items-center">
+                                <i data-lucide="github" class="w-4 h-4 mr-1"></i> Source Code
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#contact" class="px-8 py-3 bg-emerald-500 text-black font-semibold rounded-lg hover:bg-emerald-600 transition duration-300 transform hover:scale-105">
+                    Discuss Your Project Idea
+                </a>
+            </div>
+        </section>
+
+        <!-- Contact Section - UPDATED TO REMOVE FORM AND SHOW DIRECT CONTACT DETAILS -->
+        <section id="contact" class="py-20 md:py-28 border-t border-emerald-500/20">
+            <div class="max-w-xl mx-auto px-4">
+                <h2 class="section-title text-4xl font-bold text-center mb-12">Let's Connect Directly</h2>
+                <p class="text-lg text-gray-300 text-center mb-10">
+                    Reach out for freelance inquiries, consultations, or job opportunities. I look forward to hearing about your project!
+                </p>
+                <div class="space-y-6">
+                    <!-- Contact Item 1: Phone Number -->
+                    <a href="tel:+917869113635" class="contact-info-box">
+                        <i data-lucide="phone" class="w-8 h-8 text-emerald-400 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-400">Call/WhatsApp</p>
+                            <p class="text-lg font-semibold text-white hover:text-emerald-300 transition duration-200">+91 7869113635</p>
+                        </div>
+                    </a>
+
+                    <!-- Contact Item 2: Email -->
+                    <a href="mailto:tanishka78625@gmail.com" class="contact-info-box">
+                        <i data-lucide="mail" class="w-8 h-8 text-emerald-400 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-400">Email Address</p>
+                            <p class="text-lg font-semibold text-white hover:text-emerald-300 transition duration-200">tanishka78625@gmail.com</p>
+                        </div>
+                    </a>
+
+                    <!-- Contact Item 3: LinkedIn -->
+                    <a href="https://www.linkedin.com/in/tanishkagour" target="_blank" class="contact-info-box">
+                        <i data-lucide="linkedin" class="w-8 h-8 text-emerald-400 flex-shrink-0"></i>
+                        <div>
+                            <p class="text-sm font-medium text-gray-400">Professional Network</p>
+                            <p class="text-lg font-semibold text-white hover:text-emerald-300 transition duration-200">Connect on LinkedIn</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-black/90 py-8 border-t border-emerald-500/20">
+        <div class="max-w-6xl mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <!-- Using your actual links with neon hover -->
+                <a href="https://www.linkedin.com/in/tanishkagour" target="_blank" class="text-gray-400 hover:text-emerald-400 transition duration-300">
+                    <i data-lucide="linkedin" class="w-6 h-6"></i>
+                </a>
+                <a href="https://github.com/Tanishka-gour" target="_blank" class="text-gray-400 hover:text-emerald-400 transition duration-300">
+                    <i data-lucide="github" class="w-6 h-6"></i>
+                </a>
+                <a href="mailto:tanishka78625@gmail.com" class="text-gray-400 hover:text-emerald-400 transition duration-300">
+                    <i data-lucide="mail" class="w-6 h-6"></i>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">
+                &copy; <span id="current-year"></span> Tanishka Gour. All rights reserved. Built with <span class="text-emerald-500">&hearts;</span> and Tailwind CSS.
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        document.addEventListener('DOMContentLoaded', () => {
+            lucide.createIcons();
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+            // Removed setupFormSubmission()
+        });
+
+        // Toggle Mobile Menu
+        const menuButton = document.getElementById('menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('open');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+            });
+        });
+
+        // Removed the setupFormSubmission function since the form is gone.
+    </script>
+</body>
+</html>
